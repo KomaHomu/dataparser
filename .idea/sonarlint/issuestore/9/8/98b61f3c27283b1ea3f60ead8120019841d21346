@@ -1,5 +1,12 @@
 
-`
-java:S3034J">Prevent "int" promotion by adding "& 0xff" to this expression.(Öà™õúÿÿÿÿ8òüƒ••1
-e
-java:S2095!"HUse try-with-resources or close this "MqttClient" in a "finally" clause.(èâ ‹8ÄÒ••1
+Y
+java:S3034K">Prevent "int" promotion by adding "& 0xff" to this expression.(Öà™õúÿÿÿÿ
+^
+java:S2095!"HUse try-with-resources or close this "MqttClient" in a "finally" clause.(èâ ‹
+P
+java:S1854&":Remove this useless assignment to local variable "values".(È¢Ží
+V	java:S125$"<This block of commented-out lines of code should be removed.(ÙüÃæþÿÿÿÿ
+A
+java:S1481&"+Remove this unused "values" local variable.(È¢Ží
+V	java:S125,"<This block of commented-out lines of code should be removed.(’Ðš«øÿÿÿÿ
+M	java:S1066"9Replace this use of System.out or System.err by a logger.(îÜÜ6

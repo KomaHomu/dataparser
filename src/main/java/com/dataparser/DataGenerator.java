@@ -3,7 +3,10 @@ package com.dataparser;
 import com.dataparser.mqtt.TelemetryService;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
-import java.util.*;
+import java.time.Instant;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DataGenerator {
 
@@ -23,7 +26,7 @@ public class DataGenerator {
                     e.printStackTrace();
                 }
             }
-        }, 0, 1000); // Generate data every 1 second (1000 milliseconds)
+        }, 0, 2000); // Generate data every 1 second (1000 milliseconds)
     }
 
     private static String generateRandomData() {
@@ -31,7 +34,7 @@ public class DataGenerator {
         int volume = random.nextInt(100); // Generate a random volume between 0 and 4294967295
         String packageData = generateRandomPackageData();
 
-        return DataGenerator.UUID + "," + volume + "," + packageData;
+        return UUID + "," + volume + "," + packageData;
     }
 
     private static String generateRandomPackageData() {
@@ -45,3 +48,4 @@ public class DataGenerator {
         return packageDataBuilder.toString();
     }
 }
+
