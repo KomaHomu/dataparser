@@ -1,23 +1,17 @@
 package com.dataparser;
 
-import com.dataparser.http.HttpTelemetryPusher;
-import com.dataparser.mqtt.TelemetryService;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class DataparserApplication {
 
 	public static void main(String[] args) throws MqttException {
-//		HttpTelemetryPusher httpTelemetryPusher = new HttpTelemetryPusher();
-//		httpTelemetryPusher.sendTelemetry("dZcPL0QwCYdz2t7Wwvh5", "25");
+		ConfigurableApplicationContext context = SpringApplication.run(DataparserApplication.class, args);
 
-		TelemetryService telemetryService = new TelemetryService();
-		String telemetryData = "50450000C37FD3C0,282,6900000001000000000000649FA396";
-		telemetryService.sendTelemetry(telemetryData);
-
-		SpringApplication.run(DataparserApplication.class, args);
+		DataListener dataListener = context.getBean(DataListener.class);
+		dataListener.startListening(12345); // Specify the desired listening port here
 	}
-
 }

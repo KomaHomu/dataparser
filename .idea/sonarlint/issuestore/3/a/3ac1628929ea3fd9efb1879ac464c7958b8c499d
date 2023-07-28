@@ -1,8 +1,0 @@
-
-N	java:S106"9Replace this use of System.out or System.err by a logger.(­ýç’
-3
-java:S2119!"Save and re-use this "Random".(¼ÝÅf
-3
-java:S2119)"Save and re-use this "Random".(¼ÝÅf
-I
-java:S1128".Remove this unused import 'java.time.Instant'.(Â‚éñÿÿÿÿÿ

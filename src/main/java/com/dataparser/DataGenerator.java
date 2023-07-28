@@ -1,9 +1,8 @@
 package com.dataparser;
 
-import com.dataparser.mqtt.TelemetryService;
-import org.eclipse.paho.client.mqttv3.MqttException;
-
-import java.time.Instant;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,22 +10,19 @@ import java.util.TimerTask;
 public class DataGenerator {
 
     private static final String UUID = "50450000C37FD3C0";
+    private static final String SERVER_ADDRESS = "localhost"; // Change to the server IP where the server is running
+    private static final int SERVER_PORT = 12345;
 
     public static void main(String[] args) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                TelemetryService telemetryService = new TelemetryService();
                 String data = generateRandomData();
-                try {
-                    telemetryService.sendTelemetry(data);
-                    System.out.println("Telemetry data sent successfully!");
-                } catch (MqttException e) {
-                    e.printStackTrace();
-                }
+                sendDataToServer(data);
+                System.out.println("Data sent to server successfully!");
             }
-        }, 0, 2000); // Generate data every 1 second (1000 milliseconds)
+        }, 0, 2000); // Generate data every 2 seconds (2000 milliseconds)
     }
 
     private static String generateRandomData() {
@@ -47,5 +43,16 @@ public class DataGenerator {
         }
         return packageDataBuilder.toString();
     }
+
+    private static void sendDataToServer(String data) {
+        try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+
+            out.println(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
 
