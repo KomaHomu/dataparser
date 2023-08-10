@@ -14,7 +14,7 @@ public class TelemetryService {
 
     private static final String THINGSBOARD_HOST = "localhost";
     private static final int THINGSBOARD_PORT = 1883;
-    private static final String DEVICE_ACCESS_TOKEN = "vcIJLp90t8brd4dOzyNh";
+    private static final String DEVICE_ACCESS_TOKEN = "yXI9X2Yo0QEUg81ZNwzH";
     private static final String DEVICE_TELEMETRY_TOPIC = "v1/devices/me/telemetry";
 
     public void sendTelemetry(String data) throws MqttException {
@@ -33,15 +33,14 @@ public class TelemetryService {
         MqttClient client = new MqttClient(serverUri, MqttClient.generateClientId());
 
         Map<String, Object> telemetryData = new HashMap<>();
-        //telemetryData.put("ts", byteArrayToUInt32(hexStringToByteArray(packageData), 11));
+        Long timestamp = 1000L * byteArrayToUInt32(hexStringToByteArray(packageData), 11);
+        telemetryData.put("ts", timestamp); //
 
         Map<String, Object> values = new HashMap<>();
-        telemetryData.put("uuid", uuid);
-        telemetryData.put("volume", volume);
 
-        parsePackageData(packageData, telemetryData);
+        parsePackageData(uuid, volume, packageData, values);
 
-        //telemetryData.put("values", values);
+        telemetryData.put("values", values); //
 
         MqttConnectOptions options = new MqttConnectOptions();
         options.setUserName(DEVICE_ACCESS_TOKEN);
@@ -56,7 +55,10 @@ public class TelemetryService {
         client.disconnect();
     }
 
-    private void parsePackageData(String packageData, Map<String, Object> values) {
+    private void parsePackageData(String uuid, int volume, String packageData, Map<String, Object> values) {
+        values.put("uuid", uuid);
+        values.put("volume", volume);
+
         if (packageData.length() == 30) {
             byte[] bytes = hexStringToByteArray(packageData);
 
