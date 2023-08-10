@@ -8,9 +8,9 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DataGenerator {
+public class DataGenerator2 {
 
-    private static final String UUID = "50450000C37FD3C0";
+    private static final String UUID = "69690000C37FD3C0"; // Different UUID
     private static final String SERVER_ADDRESS = "localhost"; // Change to the server IP where the server is running
     private static final int SERVER_PORT = 12345;
     private static long currentTimestamp = Instant.parse("2020-01-01T00:00:00Z").getEpochSecond();

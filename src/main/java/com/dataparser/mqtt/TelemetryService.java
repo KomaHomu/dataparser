@@ -14,7 +14,7 @@ public class TelemetryService {
 
     private static final String THINGSBOARD_HOST = "localhost";
     private static final int THINGSBOARD_PORT = 1883;
-    private static final String DEVICE_ACCESS_TOKEN = "yXI9X2Yo0QEUg81ZNwzH";
+    private static final String DEVICE_ACCESS_TOKEN = "yXI9X2Yo0QEUg81ZNwzH"; // change access token accordingly
     private static final String DEVICE_TELEMETRY_TOPIC = "v1/devices/me/telemetry";
 
     public void sendTelemetry(String data) throws MqttException {
